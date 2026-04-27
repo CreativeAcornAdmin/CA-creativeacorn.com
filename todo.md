@@ -1,0 +1,64 @@
+# Creative Acorn Website TODO
+
+- [x] Design system: fonts (Courier Prime + Source Serif 4), colors (Acorn Cap, Copper Patina), noise texture
+- [x] Hero section with CA logo + tagline + description
+- [x] About section with founder description + link to hajkhalsa.com
+- [x] Projects section with magnetic hover cards (STEEZZ, ARRO, CIRCLE)
+- [x] Ethos section with pull quote
+- [x] Contact form (name, email, message) → haj@creativeacorn.com via notifyOwner
+- [x] Footer (© Creative Acorn · Santa Fe, NM)
+- [x] Waypoint dividers between sections
+- [x] Scroll-triggered fadeUp reveals (framer-motion)
+- [x] Mobile section-advance arrow
+- [x] SEO/AEO: Organization JSON-LD, meta tags, OG tags, robots.txt, sitemap
+- [x] Favicon generation (Acorn Cap colored)
+- [x] Vitest tests for contact form backend
+- [x] Fix logo: remove white background (make transparent PNG)
+- [x] Make hero logo larger
+- [x] Dark mode: differentiate from hajkhalsa.com, use selected colors more prominently
+- [x] Swap fonts: Courier Prime → body font, Quicksand → headers/display font
+- [x] Add social links (YouTube, Instagram, LinkedIn, Facebook, hajkhalsa.com) under About section, stacked vertically
+- [x] Edit: CA description copy update (creative incubator, high desert of NM)
+- [x] Edit: Founder description copy update (solopreneur, founder, builder)
+- [x] Edit: Philosophy quote update (remove "Every large", simplify)
+- [x] Light/dark mode toggle (upper right): dark=80% gray bg, light=terracotta bg
+- [x] Remove ochre/Acorn Cap yellow from palette
+- [x] Fonts: switch to Bebas Neue (headers) + Special Elite (body/typewriter)
+- [x] Alternating two-tone backgrounds: light mode (near-white / slightly darker cream), dark mode (two grays)
+- [x] Accent colors: ochre in light mode, terracotta in dark mode
+- [x] Remove "Small ideas. Big growth." tagline
+- [x] Remove green/patina color fully from palette
+- [x] Social links: remove Facebook, arrange 2x2 grid (two per line), reduce font and icon size by 40%
+- [x] Reorder sections: Hero → Projects → Ethos → Founder → Contact
+- [x] Social links: increase size 20%, arrange as 1x4 grid (single line)
+- [x] Add sparkle/movement: creative use of acorn logo in discrete but noticeable ways throughout site
+- [x] Increase light mode two-tone contrast: clean white vs noticeable light gray (per reference image)
+- [x] Edit: philosophy quote → "Plant ideas, nurture the ones that take root, and let the rest go."
+- [x] Edit: location → "We are located in Santa Fe, New Mexico."
+- [x] Light mode accent: swap ochre/brown to bright golden yellow (~#C8B400) per reference image
+- [x] Light mode accent: push to stronger/purer yellow (~#FCC72C) per new reference
+- [x] Remove parallax acorn artifact visible in upper right corner in light mode
+- [x] Push yellow accent even brighter to match reference swatch (pure saturated yellow, in-gamut oklch 0.85 0.173 88 ≈ #fdc506)
+- [x] Remove color from "Haj Khalsa" link, keep underline only
+- [x] Change accent from yellow to yellow-green per reference swatch (oklch 0.80 0.167 102)
+- [x] Add green-to-yellow gradient behind hero section (light mode)
+- [x] Remove white stripe between hero gradient and projects section
+- [x] Add green-to-yellow gradient to footer section (light mode)
+- [x] Remove light mode — lock site to dark mode only, remove theme toggle button
+- [x] Connect contact form to Deftform (Form ID: FAirI9) — replace notifyOwner with Deftform API submission
+- [x] Set the CA acorn logo as the site favicon
+- [x] Fix contact form autofill: keep dark background and light text when browser autofills inputs
+- [x] Option C: Drop Deftform, store contact submissions in own DB + send email via Resend
+- [x] Create contact_submissions table in DB schema
+- [x] Add tRPC procedure for contact form submission (save to DB + send email)
+- [x] Integrate Resend SDK for email delivery
+- [x] Update contact form frontend to use new tRPC endpoint instead of Deftform (no changes needed — same tRPC contract)
+- [x] Remove Deftform API key and dependency (Deftform code removed from routers.ts; API key and deftform.test.ts left as-is since Deftform may still be used elsewhere)
+- [x] Write/update Vitest tests for new contact form backend
+- [ ] Test end-to-end email delivery
+- [x] Replace contact form with mailto link to haj@creativeacorn.com
+- [x] Remove ContactForm component, form state, tRPC contact mutation from Home.tsx
+- [x] Remove contact router/procedure from server/routers.ts
+- [x] Remove contact DB helpers from server/db.ts
+- [x] Remove contact tests (contact.test.ts) and Resend key test (resend-key.test.ts)
+- [x] Clean up unused imports (trpc, toast, Resend, z, contact DB helpers)

@@ -1,0 +1,195 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Brand colors — yellow-green accent */
+  --color-ochre: oklch(0.80 0.167 102);
+  --color-ochre-text: oklch(0.60 0.13 102);
+  --color-clay: oklch(0.55 0.14 45);
+
+  /* Two-tone background colors */
+  --color-tone1: var(--bg-tone1);
+  --color-tone2: var(--bg-tone2);
+
+  /* Font families — Bebas Neue for display, Special Elite for body */
+  --font-display: "Bebas Neue", "Impact", sans-serif;
+  --font-body: "Special Elite", "Courier New", monospace;
+}
+
+/* ─── LIGHT MODE: Two-tone warm cream ─── */
+:root {
+  --radius: 0.5rem;
+  --bg-tone1: oklch(0.99 0.002 80);
+  --bg-tone2: oklch(0.92 0.005 80);
+  --background: oklch(0.99 0.002 80);
+  --foreground: oklch(0.20 0.02 60);
+  --card: oklch(0.92 0.005 80);
+  --card-foreground: oklch(0.20 0.02 60);
+  --popover: oklch(0.99 0.002 80);
+  --popover-foreground: oklch(0.20 0.02 60);
+  --primary: oklch(0.80 0.167 102);
+  --primary-foreground: oklch(0.20 0.02 60);
+  --secondary: oklch(0.80 0.167 102);
+  --secondary-foreground: oklch(0.20 0.02 60);
+  --muted: oklch(0.92 0.005 80);
+  --muted-foreground: oklch(0.45 0.02 60);
+  --accent: oklch(0.92 0.005 80);
+  --accent-foreground: oklch(0.20 0.02 60);
+  --destructive: oklch(0.50 0.20 27);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.86 0.01 80);
+  --input: oklch(0.86 0.01 80);
+  --ring: oklch(0.80 0.167 102);
+}
+
+/* ─── DARK MODE: Two-tone gray ─── */
+.dark {
+  --bg-tone1: oklch(0.25 0.005 60);
+  --bg-tone2: oklch(0.30 0.005 60);
+  --background: oklch(0.25 0.005 60);
+  --foreground: oklch(0.90 0.01 80);
+  --card: oklch(0.30 0.005 60);
+  --card-foreground: oklch(0.90 0.01 80);
+  --popover: oklch(0.30 0.005 60);
+  --popover-foreground: oklch(0.90 0.01 80);
+  --primary: oklch(0.55 0.14 45);
+  --primary-foreground: oklch(0.15 0.02 60);
+  --secondary: oklch(0.50 0.12 45);
+  --secondary-foreground: oklch(0.15 0.02 60);
+  --muted: oklch(0.30 0.005 60);
+  --muted-foreground: oklch(0.65 0.01 60);
+  --accent: oklch(0.30 0.005 60);
+  --accent-foreground: oklch(0.90 0.01 80);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.35 0.005 60);
+  --input: oklch(0.35 0.005 60);
+  --ring: oklch(0.55 0.14 45);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0.05em;
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [type="button"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  [type="reset"]:not(:disabled),
+  a[href],
+  select:not(:disabled),
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled) {
+    @apply cursor-pointer;
+  }
+}
+
+/* Noise texture overlay */
+.noise-overlay::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* Alternating section backgrounds */
+.section-tone1 {
+  background-color: var(--bg-tone1);
+}
+.section-tone2 {
+  background-color: var(--bg-tone2);
+}
+
+/* Hero gradient — green to yellow-green, light mode only */
+.hero-gradient {
+  background: linear-gradient(135deg, oklch(0.60 0.10 138) 0%, oklch(0.80 0.14 108) 50%, oklch(0.85 0.12 100) 100%);
+}
+.dark .hero-gradient {
+  background: none;
+  background-color: var(--bg-tone2);
+}
+
+/* Override browser autofill styling to match dark theme */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+textarea:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px var(--background) inset !important;
+  -webkit-text-fill-color: var(--foreground) !important;
+  caret-color: var(--foreground) !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .flex {
+    min-height: 0;
+    min-width: 0;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      max-width: 1280px;
+    }
+  }
+}

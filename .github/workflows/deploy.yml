@@ -21,20 +21,25 @@ jobs:
       - name: Build
         run: bun run build
 
-      - name: Check dist and secrets
+      - name: Check dist
+        run: ls -la dist/ && ls -la dist/assets/
+        continue-on-error: true
+
+      - name: Check secrets length
         run: |
-          echo "dist contents:"
-          ls -la dist/
           echo "CF token length: ${#CLOUDFLARE_API_TOKEN}"
-          echo "CF account ID length: ${#CLOUDFLARE_ACCOUNT_ID}"
-          echo "Account ID value: $CLOUDFLARE_ACCOUNT_ID"
-          npx wrangler@latest --version
+          echo "CF account ID: $CLOUDFLARE_ACCOUNT_ID"
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        continue-on-error: true
+
+      - name: Install wrangler
+        run: npm install -g wrangler
+        continue-on-error: true
 
       - name: Deploy to Cloudflare Pages
-        run: npx wrangler@latest pages deploy dist --project-name=creativeacorn-com 2>&1
+        run: wrangler pages deploy dist --project-name=creativeacorn-com 2>&1
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

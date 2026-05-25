@@ -296,32 +296,58 @@ const SOCIAL_LINKS = [
   },
 ];
 
-/* ─── Projects Data ─── */
-const PROJECTS = [
+/* ─── Live Projects Data ─── */
+const LIVE_PROJECTS = [
+  {
+    name: "ARRO",
+    tagline: "Home-buying guidance, without the chaos.",
+    description:
+      "A startup based in Santa Fe building a unique app to guide and empower home buyers. A step-by-step co-pilot that walks buyers from \"am I ready?\" to \"I found my broker.\" Real guidance. Zero fluff.",
+    status: "Live",
+    url: "https://arrohome.app",
+    logo: "/arro-logo.png",
+    logoAlt: "ARRO",
+  },
+  {
+    name: "The Slacker Chronicles",
+    tagline: "Slowing down on purpose.",
+    description:
+      "A YouTube channel about going outside, not taking it all so seriously, and paying attention to the things that actually matter. Climbing, skiing, and the occasional rant.",
+    status: "Live",
+    url: "https://www.youtube.com/@TheSlackerChronicles",
+    logo: "/slacker-logo.png",
+    logoAlt: "The Slacker Chronicles",
+  },
+];
+
+/* ─── Cooking Projects Data ─── */
+const COOKING_PROJECTS = [
   {
     name: "STEEZZ",
     tagline: "Crew-first mountain culture",
     description:
       "A coordination and culture platform for skiers and snowboarders. Built around real-world friend groups, not follower counts.",
-    status: "In Development",
-  },
-  {
-    name: "ARRO",
-    tagline: "Hinge for home hunters",
-    description:
-      "A matchmaking platform connecting home buyers with the right buyer's broker through taste-based discovery.",
-    status: "In Development",
+    status: "Cooking",
   },
   {
     name: "CIRCLE",
     tagline: "Breathwork & mindfulness",
     description:
       "A breathwork and mindfulness platform built around nervous system regulation, daily presence practices, and wellness scoring.",
-    status: "In Development",
+    status: "Cooking",
   },
 ];
 
-
+/* ─── External link icon ─── */
+function ExternalLinkIcon() {
+  return (
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+      <polyline points="15 3 21 3 21 9" />
+      <line x1="10" y1="14" x2="21" y2="3" />
+    </svg>
+  );
+}
 
 /* ─── Section Wrapper with alternating tones ─── */
 function Section({
@@ -377,7 +403,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── PROJECTS — Tone 2 ─── */}
+      {/* ─── LIVE PROJECTS — Tone 2 ─── */}
       <Section tone={2} data-section>
         <FadeUp>
           <h2 className="mb-8 font-[family-name:var(--font-display)] text-2xl md:text-3xl tracking-[0.1em] uppercase text-primary">
@@ -385,49 +411,102 @@ export default function Home() {
           </h2>
         </FadeUp>
         <div className="space-y-6">
-          {PROJECTS.map((project, i) => (
+          {LIVE_PROJECTS.map((project, i) => (
             <FadeUp key={project.name} delay={i * 0.1}>
-              <MagneticCard className="group rounded-lg border border-border bg-tone1/60 p-6 transition-all shadow-lg shadow-transparent hover:border-primary/30 hover:shadow-primary/5">
+              <MagneticCard>
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block rounded-lg border border-border bg-tone1/60 p-6 transition-all shadow-lg shadow-transparent hover:border-primary/30 hover:shadow-primary/5"
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex items-start gap-4">
+                      {/* Project logo */}
+                      <img
+                        src={project.logo}
+                        alt={project.logoAlt}
+                        className="mt-0.5 h-10 w-10 shrink-0 rounded-lg object-cover"
+                      />
+                      <div>
+                        <h3 className="font-[family-name:var(--font-display)] text-2xl md:text-3xl tracking-[0.08em]">
+                          {project.name}
+                        </h3>
+                        <p className="mt-0.5 text-sm text-muted-foreground">
+                          {project.tagline}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex shrink-0 flex-col items-end gap-2">
+                      <span className="rounded-full border border-primary/30 bg-primary/10 px-3 py-0.5 font-[family-name:var(--font-display)] text-xs tracking-wider text-primary">
+                        {project.status}
+                      </span>
+                      <span className="flex items-center gap-1 text-xs text-muted-foreground/50 transition-colors group-hover:text-primary/60">
+                        <ExternalLinkIcon />
+                      </span>
+                    </div>
+                  </div>
+                  <p className="mt-3 pl-14 leading-relaxed text-muted-foreground">
+                    {project.description}
+                  </p>
+                </a>
+              </MagneticCard>
+            </FadeUp>
+          ))}
+        </div>
+      </Section>
+
+      <Waypoint />
+
+      {/* ─── COOKING — Tone 1 ─── */}
+      <Section tone={1} data-section>
+        <FadeUp>
+          <h2 className="mb-2 font-[family-name:var(--font-display)] text-2xl md:text-3xl tracking-[0.1em] uppercase text-primary">
+            Cooking
+          </h2>
+          <p className="mb-8 text-sm text-muted-foreground">
+            Ideas in progress. Not ready yet — but they're on the stove.
+          </p>
+        </FadeUp>
+        <div className="space-y-6">
+          {COOKING_PROJECTS.map((project, i) => (
+            <FadeUp key={project.name} delay={i * 0.1}>
+              <MagneticCard className="group rounded-lg border border-border bg-tone2/60 p-6 transition-all shadow-lg shadow-transparent hover:border-primary/20 hover:shadow-primary/5">
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex items-start gap-3">
                     {/* Acorn bullet */}
                     <motion.div
-                      className="mt-1.5 shrink-0 text-primary/40 transition-colors group-hover:text-primary"
+                      className="mt-1.5 shrink-0 text-primary/30 transition-colors group-hover:text-primary/50"
                       whileHover={{ rotate: 15, scale: 1.2 }}
                     >
                       <AcornSvg size={14} />
                     </motion.div>
                     <div>
-                      <h3 className="font-[family-name:var(--font-display)] text-2xl md:text-3xl tracking-[0.08em]">
+                      <h3 className="font-[family-name:var(--font-display)] text-2xl md:text-3xl tracking-[0.08em] text-foreground/70">
                         {project.name}
                       </h3>
-                      <p className="mt-0.5 text-sm text-muted-foreground">
+                      <p className="mt-0.5 text-sm text-muted-foreground/70">
                         {project.tagline}
                       </p>
                     </div>
                   </div>
-                  <span className="shrink-0 rounded-full border border-primary/30 bg-primary/10 px-3 py-0.5 font-[family-name:var(--font-display)] text-xs tracking-wider text-primary">
+                  <span className="shrink-0 rounded-full border border-muted-foreground/20 bg-muted-foreground/5 px-3 py-0.5 font-[family-name:var(--font-display)] text-xs tracking-wider text-muted-foreground/50">
                     {project.status}
                   </span>
                 </div>
-                <p className="mt-3 pl-[26px] leading-relaxed text-muted-foreground">
+                <p className="mt-3 pl-[26px] leading-relaxed text-muted-foreground/60">
                   {project.description}
                 </p>
               </MagneticCard>
             </FadeUp>
           ))}
         </div>
-        <FadeUp className="mt-6">
-          <p className="text-sm italic text-muted-foreground">
-            More projects in the works. Stay tuned.
-          </p>
-        </FadeUp>
       </Section>
 
       <Waypoint />
 
-      {/* ─── PHILOSOPHY — Tone 1 ─── */}
-      <Section tone={1} data-section>
+      {/* ─── PHILOSOPHY — Tone 2 ─── */}
+      <Section tone={2} data-section>
         <FadeUp>
           <h2 className="mb-6 font-[family-name:var(--font-display)] text-2xl md:text-3xl tracking-[0.1em] uppercase text-primary">
             Philosophy
@@ -455,8 +534,8 @@ export default function Home() {
 
       <Waypoint />
 
-      {/* ─── FOUNDER — Tone 2 ─── */}
-      <Section tone={2} data-section>
+      {/* ─── FOUNDER — Tone 1 ─── */}
+      <Section tone={1} data-section>
         <FadeUp>
           <h2 className="mb-4 font-[family-name:var(--font-display)] text-2xl md:text-3xl tracking-[0.1em] uppercase text-primary">
             Founder
@@ -498,8 +577,8 @@ export default function Home() {
 
       <Waypoint />
 
-      {/* ─── CONTACT — Tone 1 ─── */}
-      <Section tone={1} data-section>
+      {/* ─── CONTACT — Tone 2 ─── */}
+      <Section tone={2} data-section>
         <FadeUp>
           <h2 className="mb-6 font-[family-name:var(--font-display)] text-2xl md:text-3xl tracking-[0.1em] uppercase text-primary">
             Get in Touch
